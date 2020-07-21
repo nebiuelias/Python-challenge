@@ -5,7 +5,8 @@ import string
 import csv
 import array as my_array
 
-#definig the input and output file paths
+#definig the input and output file paths. 
+#due to runtime error, I had to use absoulte addressing than the prefferred relative one
 file_to_load = "c:/Users/elija/Desktop/Class_Room/Python-challenge/Python-challenge/PyBank/Resources/budget_data.csv"
 file_to_output = os.path.join("c:/Users/elija/Desktop/Class_Room/Python-challenge/Python-challenge/PyBank/Analysis", "Analysis_result.txt")
 
@@ -27,6 +28,8 @@ change=0
 counter_i=0
 counter_j=0
 ary_len=0
+
+#section to load and read the input data from the CSV file
 with open (file_to_load) as budget_data:
     reader=csv.reader(budget_data)
     next(reader) #code to skip the header
@@ -36,15 +39,16 @@ with open (file_to_load) as budget_data:
         number_of_month=number_of_month + 1 
         #Summing up Total Profit
         Total_profit_loss= Total_profit_loss + (int(row[1]))
-        #section to populate array with the monthly profit_change
+        #section to populate a list with the monthly profit and a second list to hold the corresponding month
         profit=int(row[1])
         dates_profit=(row[0])
         
         profit_by_month.append(profit)
         profit_date.append(dates_profit)
+
 ary_len=len(profit_by_month)
 j=1
-#populating a list with the profit change
+#populating a list with the profit change from month to month
 for i in range(0,ary_len-1): 
     change=(profit_by_month[j] - profit_by_month[i])
     change_in_profit.append(change)
@@ -73,6 +77,9 @@ for i in range(0,array_len2):
 average_change_profit= round(Total_change_profit/array_len2,2)
 greatest_increase_month=profit_date[index_increase+1]
 greatest_decrease_month=profit_date[index_decrease+1]
+
+print("Financial Analysis")
+print("............................................")
 print(f"Total Months: {str(number_of_month)}")
 print(f"Total: {str(Total_profit_loss)}")
 print(f"Average Change: {str(average_change_profit)}")
